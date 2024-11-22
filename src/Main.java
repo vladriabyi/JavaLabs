@@ -21,6 +21,14 @@ public class Main {
 
         System.out.println("Матриця B:");
         MatrixUtils.printMatrix(B);
+
+        // Використовуємо методи з MatrixUtils
+        long xorResult[][] = MatrixUtils.bitwiseXOR(A, B);
+        System.out.println("Результат побітового XOR матриць A і B:");
+        MatrixUtils.printMatrix(xorResult);
+
+        long sum = MatrixUtils.sumOddEvenColumns(A);
+        System.out.println("Сума найбільших (непарні стовпці) та найменших (парні стовпці): " + sum);
     }
 
     // Генерація матриці з випадковими числами
@@ -37,6 +45,39 @@ public class Main {
 }
 
 class MatrixUtils {
+    // Побітове виключне "але"
+    public static long[][] bitwiseXOR(long[][] A, long[][] B) {
+        int rows = A.length;
+        int cols = A[0].length;
+        long[][] result = new long[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i][j] = A[i][j] ^ B[i][j];
+            }
+        }
+        return result;
+    }
+
+    // Сума найбільших (непарні стовпці) та найменших (парні стовпці)
+    public static long sumOddEvenColumns(long[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        long sum = 0;
+
+        for (int j = 0; j < cols; j++) {
+            long extreme = (j % 2 == 0) ? Long.MAX_VALUE : Long.MIN_VALUE;
+            for (int i = 0; i < rows; i++) {
+                if (j % 2 == 0) {
+                    extreme = Math.min(extreme, matrix[i][j]); // Найменше (парні)
+                } else {
+                    extreme = Math.max(extreme, matrix[i][j]); // Найбільше (непарні)
+                }
+            }
+            sum += extreme;
+        }
+        return sum;
+    }
+
     // Виведення матриці
     public static void printMatrix(long[][] matrix) {
         for (long[] row : matrix) {
