@@ -17,5 +17,5 @@ This program:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/vladriabyi/JavaLabs.git
+   git clone https://github.com/vladriabyi/javalab1.git
 
