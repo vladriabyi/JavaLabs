@@ -23,7 +23,7 @@ public class Main {
         MatrixUtils.printMatrix(B);
 
         // Використовуємо методи з MatrixUtils
-        long xorResult[][] = MatrixUtils.bitwiseXOR(A, B);
+        long[][] xorResult = MatrixUtils.bitwiseXOR(A, B);
         System.out.println("Результат побітового XOR матриць A і B:");
         MatrixUtils.printMatrix(xorResult);
 
@@ -67,10 +67,11 @@ class MatrixUtils {
         for (int j = 0; j < cols; j++) {
             long extreme = (j % 2 == 0) ? Long.MAX_VALUE : Long.MIN_VALUE;
             for (int i = 0; i < rows; i++) {
+                long value = matrix[i][j];
                 if (j % 2 == 0) {
-                    extreme = Math.min(extreme, matrix[i][j]); // Найменше (парні)
+                    extreme = Math.min(extreme, value); // Найменше (парні)
                 } else {
-                    extreme = Math.max(extreme, matrix[i][j]); // Найбільше (непарні)
+                    extreme = Math.max(extreme, value); // Найбільше (непарні)
                 }
             }
             sum += extreme;
@@ -78,11 +79,11 @@ class MatrixUtils {
         return sum;
     }
 
-    // Виведення матриці
+    // Виведення матриці з вирівняними значеннями
     public static void printMatrix(long[][] matrix) {
         for (long[] row : matrix) {
             for (long value : row) {
-                System.out.printf("%5d ", value);
+                System.out.printf("%5d ", value); // Використовуємо 5 символів для вирівнювання
             }
             System.out.println();
         }
